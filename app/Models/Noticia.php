@@ -9,9 +9,12 @@ class Noticia extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['Titol','Data_publicacio','Contingut','imatge_id'];
+    protected $fillable = ['Titol','Data_publicacio','Contingut'];
 
 
+    public function imatges(){
+        return $this->belongsToMany(Imatge::class,'imatge_noticia');
+    }
 
     public function categories(){
         return $this->belongsToMany(Categoria::class,'categoria_noticies');

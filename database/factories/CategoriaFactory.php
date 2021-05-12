@@ -22,7 +22,8 @@ class CategoriaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "Nom"=>$this->faker->unique()->randomElements(['corazon','tecnologia','deporte','actualidad']),
+            "Descripcio"=>$this->faker->text('10')
         ];
     }
 }

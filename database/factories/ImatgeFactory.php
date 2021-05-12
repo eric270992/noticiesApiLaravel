@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Imatge;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ImatgeFactory extends Factory
@@ -22,7 +23,7 @@ class ImatgeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "Nom"=>Str::random(10),
         ];
     }
 }

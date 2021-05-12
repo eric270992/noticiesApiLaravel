@@ -22,10 +22,9 @@ class NoticiaFactory extends Factory
     public function definition()
     {
         return [
-            'Titol'=>$this->faker->titol,
-            'Contingut'=>$this->faker->contingut,
+            'Titol'=>$this->faker->words(3),
+            'Contingut'=>$this->faker->text,
             'Data_publicacio'=>$this->faker->now(),
-            'imatge_id'=>$this->faker->integer,
         ];
     }
 }

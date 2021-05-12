@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImatge extends Migration
+class CreateImatges extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateImatge extends Migration
      */
     public function up()
     {
-        Schema::create('imatge', function (Blueprint $table) {
+        Schema::create('imatges', function (Blueprint $table) {
             $table->id();
             $table->string("nom");
             $table->timestamps();
