@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AutorsController;
 use App\Http\Controllers\NoticiaController;
+use App\Http\Controllers\CategoriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +21,9 @@ Route::get('/', function () {
 });
 
 Route::resource('noticies', NoticiaController::class);
+
+Route::get('/assignCategory', [NoticiaController::class,'assignCategory']);
+
+Route::resource('autors', AutorsController::class);
+
+Route::resource('categorias', CategoriaController::class);

@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Noticia;
+use App\Models\Autor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class NoticiaFactory extends Factory
+class AutorFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Noticia::class;
+    protected $model = Autor::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,7 @@ class NoticiaFactory extends Factory
     public function definition()
     {
         return [
-            'Titol'=>$this->faker->text(15),
-            'Contingut'=>$this->faker->text(700),
-            'Data_publicacio'=>now(),
+            "Nom"=>$this->faker->name
         ];
     }
 }

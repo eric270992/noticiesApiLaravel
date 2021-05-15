@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNoticies extends Migration
+class CreateAutorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateNoticies extends Migration
      */
     public function up()
     {
-        Schema::create('noticies', function (Blueprint $table) {
+        Schema::create('autors', function (Blueprint $table) {
             $table->id();
-            $table->string("titol");
-            $table->text("contingut");
-            $table->date("data_publicacio");
+            $table->string("Nom");
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateNoticies extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('noticies');
+        Schema::dropIfExists('autors');
     }
 }

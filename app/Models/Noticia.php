@@ -11,6 +11,8 @@ class Noticia extends Model
 
     protected $fillable = ['Titol','Data_publicacio','Contingut'];
 
+    protected $table="Noticies";
+
 
     public function imatges(){
         return $this->belongsToMany(Imatge::class,'imatge_noticia');
