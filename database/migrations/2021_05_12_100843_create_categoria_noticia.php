@@ -15,9 +15,13 @@ class CreateCategoriaNoticia extends Migration
     {
         Schema::create('categoria_noticia', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("categoria_id");
-            $table->bigInteger("noticia_id");
+            $table->bigInteger("noticia_id")->unsigned();
+            $table->bigInteger("categoria_id")->unsigned();
             $table->timestamps();
+
+
+            $table->foreign('noticia_id')->references('id')->on('noticies');
+            $table->foreign('categoria_id')->references('id')->on('categories');
         });
     }
 
@@ -28,6 +32,6 @@ class CreateCategoriaNoticia extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categoria_imatges');
+        Schema::dropIfExists('categoria_noticia');
     }
 }

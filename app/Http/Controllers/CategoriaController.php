@@ -15,8 +15,8 @@ class CategoriaController extends Controller
     public function index()
     {
         $categorias = Categoria::get();
-        //Retornar vista amb llistat de categories
-        return view("Categorias.categorias")->with('categorias',$categorias);
+        //Retornar vista amb llistat de totes les categories
+        return view("Categorias.categorias")->with("categorias",$categorias);
     }
 
     /**
@@ -26,7 +26,8 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        //Mostrar formulari per crear categorias
+        return view("Categorias.categoria_form");
     }
 
     /**
@@ -37,7 +38,14 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Recuperem els elements que arriben en el request i creem un categoria
+        $categoria = new Categoria();
+        $categoria->nom = $request->nombre;
+        $categoria->descripcio = $request->descripcion;
+
+        $categoria->save();
+
+        return redirect(route('categorias.index'));
     }
 
     /**
@@ -48,7 +56,8 @@ class CategoriaController extends Controller
      */
     public function show($id)
     {
-        //
+        //Dirigim a la vista on mostrarem en detall una categoria i a més les notícies associades
+        return view("Categorias.categoria_detail")->with("categoria",Categoria::find($id));
     }
 
     /**
@@ -83,5 +92,15 @@ class CategoriaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAll(){
+        return Categoria::get();
+    }
+
+    public function getNoticiesCategoria($id){
+        $categoria = Categoria::find($id);
+
+        return $categoria->noticies;
     }
 }

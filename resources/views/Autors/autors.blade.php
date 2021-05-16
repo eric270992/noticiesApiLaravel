@@ -7,8 +7,7 @@
             <tr>
                 <th>ID</th>
                 <th>NOMBRE</th>
-                <th>EDITAR</th>
-                <th>NOTICIAS</th>
+                <th>VER</th>
                 <th>ELIMINAR</th>
             </tr>
         </thead>
@@ -18,10 +17,7 @@
                     <td>{{$autor->id}}</td>
                     <td>{{$autor->Nom}}</td>
                     <td>
-                        <a href="#" class="btn btn-success">EDITAR</a>
-                    </td>
-                    <td>
-                        <a href="#" class="btn btn-info">NOTICIES</a>
+                        <a href="{{route('autors.show',$autor->id)}}" class="btn btn-success">*</a>
                     </td>
                     <td>
                         <a href="#" class="btn btn-danger">-</a>
@@ -30,5 +26,6 @@
             @endforeach
         </tbody>
     </table>
+
 
 @endsection

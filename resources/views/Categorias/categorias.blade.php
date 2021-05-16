@@ -2,6 +2,7 @@
 
 @section('contenido')
 
+<a href="{{route('categorias.create')}}" class="btn btn-lg btn-success my-5">Añadir Categoria</a>
 <table class="table table-striped">
     <thead>
         <tr>

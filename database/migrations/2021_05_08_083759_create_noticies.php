@@ -18,7 +18,10 @@ class CreateNoticies extends Migration
             $table->string("titol");
             $table->text("contingut");
             $table->date("data_publicacio");
+            $table->bigInteger("autor_id")->unsigned();
             $table->timestamps();
+
+            $table->foreign('autor_id')->references('id')->on('autors');
         });
     }
 

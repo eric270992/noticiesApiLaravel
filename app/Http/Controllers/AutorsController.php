@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Autor;
+use App\Models\Noticia;
 use Illuminate\Http\Request;
 
 class AutorsController extends Controller
@@ -48,7 +49,13 @@ class AutorsController extends Controller
      */
     public function show($id)
     {
-        //
+        //Recuperem un autor per ID i també les notícies que té relacionades.
+        $autor=Autor::find($id);
+
+        $noticies = Noticia::where("autor_id","=",$id)->paginate(10);
+
+        //Retornem a la vista corresponent amb les noticies i l'autor
+        return view("Autors.autor-detail")->with(["autor"=>$autor,"noticies"=>$noticies]);
     }
 
     /**
@@ -83,5 +90,9 @@ class AutorsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAll(){
+        return Autor::paginate(10);
     }
 }

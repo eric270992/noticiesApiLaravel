@@ -10,4 +10,5 @@ class CategoriaNoticia extends Model
     use HasFactory;
 
     protected $table="categoria_noticies";
+
 }

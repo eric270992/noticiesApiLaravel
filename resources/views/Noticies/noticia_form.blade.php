@@ -6,17 +6,23 @@
 </div>
 
 <div class="container">
-    <form action="{{route("noticies.store")}}" method="POST">
-
+    <!-- Si passem una notícia, canviem capçalera ja que voldrem actualitzar -->
+    @if ($noticia)
+        <form action="{{route("noticies.update",$noticia->id)}}" enctype="multipart/form-data">
+        @method("PUT")
+    <!-- Si no té noticia és que estem fent una nova -->
+    @else
+        <form action="{{route("noticies.store")}}" method="POST" enctype="multipart/form-data">
+    @endif
         @csrf
         <div class="form-group">
             <label>Titulo</label>
-            <input class="form-control" name="titulo" type="text">
+            <input class="form-control" name="titulo" type="text" value="{{$noticia ? $noticia->titol : ''}}">
         </div>
 
         <div class="form-group">
             <label>Categoria</label>
-            <select  class="form-control" name="categorias" multiple>
+            <select  class="form-control" name="categorias[]" multiple>
                 @foreach ($categorias as $categoria)
                     <option value="{{$categoria->id}}">{{$categoria->nom}}</option>
                 @endforeach
@@ -34,7 +40,13 @@
 
         <div class="form-group">
             <label>Contenido</label>
-            <textarea class="form-control" rows="3" name="contenido"></textarea>
+            <textarea class="form-control" rows="3" name="contenido">
+                @if ($noticia)
+                    {{$noticia->contingut}}
+                @else
+
+                @endif
+            </textarea>
         </div>
 
         <div class="input-group mb-3">

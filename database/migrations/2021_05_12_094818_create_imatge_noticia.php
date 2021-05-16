@@ -19,8 +19,8 @@ class CreateImatgeNoticia extends Migration
             $table->bigInteger('noticia_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('imatge_id')->references('id')->on('imatge');
-            $table->foreign('categoria_id')->references('id')->on('categoria');
+            $table->foreign('imatge_id')->references('id')->on('imatges');
+            $table->foreign('noticia_id')->references('id')->on('noticies');
 
         });
     }

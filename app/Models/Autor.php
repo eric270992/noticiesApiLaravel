@@ -10,4 +10,9 @@ class Autor extends Model
     use HasFactory;
 
     protected $fillable = ["Nom"];
+
+    //Relacio one to many
+    public function noticies(){
+        return $this->hasMany(Noticia::class,"noticies");
+    }
 }

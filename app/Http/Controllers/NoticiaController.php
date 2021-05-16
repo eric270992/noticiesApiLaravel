@@ -27,8 +27,8 @@ class NoticiaController extends Controller
         $noticia = Noticia::where('id',1)->first();
 
         //Indiquem que ens agregui en aquesta noticia les seguents categories
-        /*$noticia->categories()->attach([1,2]);
-        $noticia->save();*/
+        // $noticia->categories()->attach([1,2]);
+        // $noticia->update();
 
         dd($noticia->categories);
     }
@@ -63,20 +63,23 @@ class NoticiaController extends Controller
     //     "autor" => "required"
     //    ]);
 
-       // dd($request);
+       //dd($request->imatges->getClientOriginalName());
 
        //Guardem la imatge
        $imatge = new Imatge();
-       $imatge->Nom = $request->imatges;
+       $imatge->Nom = $request->imatges->getClientOriginalName();
        $imatge->save();
+       $request->imatges->move(public_path('images'),$imatge->Nom);
 
        $noticia = new Noticia();
        $noticia->titol = $request["titulo"];
-       $noticia->categories()->sync($request->categories);
        $noticia->contingut = $request->contenido;
        $noticia->data_publicacio = now();
        //$noticia->autor_id = $request->autor;
        $noticia->save();
+       $noticia->categories()->sync($request->categorias);
+       $noticia->update();
+
        //Sincornitzem la taula intermedia on mirem si ja hi ha un registre amb el mateix id de la imatge i la categoria
        $noticia->imatges()->sync($imatge->id,$noticia->id);
        $noticia->update();
@@ -107,7 +110,12 @@ class NoticiaController extends Controller
      */
     public function edit($id)
     {
-        //
+        //Mostra el mateix formulari on creem la noticía però li passem la noticia a editar carregada
+        $noticia = Noticia::find($id);
+
+        $categories = Categoria::get();
+        $autors = Autor::get();
+        return view("Noticies.noticia_form")->with(["categorias"=>$categories,"autors"=>$autors,"noticia"=>$noticia]);
     }
 
     /**
@@ -119,7 +127,8 @@ class NoticiaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Actualizem la noticia
+        dd($request);
     }
 
     /**
@@ -131,5 +140,13 @@ class NoticiaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAll(){
+        return Noticia::paginate(10);
+    }
+
+    public function getById($id){
+        return Noticia::find($id);
     }
 }
