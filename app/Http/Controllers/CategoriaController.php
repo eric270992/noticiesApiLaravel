@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Noticia;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 
@@ -56,8 +57,17 @@ class CategoriaController extends Controller
      */
     public function show($id)
     {
+        $categoria = Categoria::find($id);
+        // //Fem consulta indicant que la noticia tingui categoria
+        // $noticies = Noticia::whereHas('categories',function($q) use ($id){
+        //     //Indiquem que el id de les categories de la noticia sigui igual al que rebem
+        //     $q->where('categories.id',$id);
+        // })->paginate(10);
+
+        //Recuperem noticies de la categoria amb paginació.
+        $noticies=$categoria->noticies()->paginate(10);
         //Dirigim a la vista on mostrarem en detall una categoria i a més les notícies associades
-        return view("Categorias.categoria_detail")->with("categoria",Categoria::find($id));
+        return view("Categorias.categoria_detail")->with(["categoria"=>$categoria,"noticies"=>$noticies]);
     }
 
     /**
@@ -101,6 +111,6 @@ class CategoriaController extends Controller
     public function getNoticiesCategoria($id){
         $categoria = Categoria::find($id);
 
-        return $categoria->noticies;
+        return $categoria->noticies()->paginate(10);
     }
 }

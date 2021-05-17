@@ -28,4 +28,4 @@ Route::resource('autors', AutorsController::class);
 
 Route::resource('categorias', CategoriaController::class);
 
-Route::get("/getNoticiesCategoria/{id}",[CategoriaController::class,"getNoticiesCategoria"]);
+Route::get("/categoria/{id}/noticies",[CategoriaController::class,"getNoticiesCategoria"]);

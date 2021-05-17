@@ -8,7 +8,7 @@
             <h1>{{$categoria->nom}}</h1>
         </div>
         @if ($categoria->noticies)
-            @foreach ($categoria->noticies as $noticia)
+            @foreach ($noticies as $noticia)
             <div class="col-xs-12 col-md-6">
                 <div class="noticia-header">
                     <h2>{{$noticia->titol}}</h2>
